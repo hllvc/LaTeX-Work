@@ -1,0 +1,488 @@
+\documentclass{article}
+\usepackage[centertags]{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[textwidth=15cm,margin=3cm]{geometry}
+
+\usepackage{tabularx} % Paket za tabele
+\usepackage{subfigure} % Paket za vi�e figura u jednoj
+\usepackage{tikz} % Paket za crtanje
+
+\newtheorem{zadatak}{Zadatak}
+\newtheorem{primjer}{Primjer}
+
+\newenvironment{dokaz}
+    {\noindent\textbf{DOKAZ:}\\} {\hfill $\clubsuit$}
+
+\begin{document}
+% U preambuli su navedena pored standardnih paketa i tri paketa neophodna za naredna pisanja.
+
+% PRIMJER RADA Zadatka
+\begin{zadatak}
+    Neka su $A, B$ i $C$ proizvoljni skupovi i $U$ univerzum. Koristeći svaki od načina dokazivanja, dokazati skupovne jednakosti,
+    \begin{enumerate}
+        \item $(A\setminus B)\cup (A\cap B)\cup (B\setminus A)=A\cup B$.
+        \item $A\setminus (B\setminus C)=(A\setminus B)\cup (A\cap C)$.
+    \end{enumerate}
+\end{zadatak}
+
+\vskip 1cm
+
+% PRIMJER RADA Primjera
+\begin{primjer}
+    Dokažimo skupovnu jednakost $(A\setminus B)\cup (A\cap B)\cup (B\setminus A)=A\cup B$.
+\end{primjer}
+
+\begin{dokaz}
+
+    \noindent\textbf{(I način - aksion ekstenzionalnosti)}
+    \smallskip
+
+    \noindent
+    Dokažimo inkluziju "$\subseteq $"\\
+    a) Neka je $x\in (A\setminus B)\cup (A\cap B)\cup (B\setminus A)$ proizvoljan. Tada na osnovu aksioma unije slijedi da $x$ pripada skupu $A\setminus B$ ili skupu $A\cap B$ ili skupu $B\setminus A$,
+    $$x\in A\setminus B\vee x\in A\cap B\vee x\in B\setminus A.$$
+    \smallskip
+
+    \noindent
+    b) Sada na osnovu definicije razlike skupova imamo da $x$ pripada skupu $A$, a ne pripada skupu $B$ i $x$ pripada skupu $B$, a ne pripada skupu $A$,
+    $$(x\in A\land x\notin B)\vee (A\cap B)\vee (x\in B\land x\notin A).$$
+    \smallskip
+
+    \noindent
+    c) Na osnovu definicije presjeka, $x$ pripada skupu $A$ i $x$ pripada skupu $B$,
+    \begin{equation}
+        (x\in A\land x\notin B)\vee (x\in A\land x\in B)\vee (x\in B\land x\notin A). \label{eq:1}
+    \end{equation}
+    \smallskip
+
+    \noindent
+    d) Prema zakonu distributivnosti $(p\land \lnot q)\vee (p\land q)\Longleftrightarrow  p\land (\lnot q\vee q)$, i kako je $(\lnot q\vee q)$ uvijek tačno,
+    \begin{align*}
+        \eqref{eq:1}\hspace{8px} &\Longleftrightarrow & &x\in A & &\land & (x\notin B&\vee x\in B) & &\vee & &(x\in B\land x\notin A)\\
+                           &\Longleftrightarrow & &x\in A & &\land & &\top & &\vee & &(x\in B\land x\notin A)
+    \end{align*}
+    Ovo je dalje prema zakonu distributivnosti $p\vee (q\land \lnot p)\Longleftrightarrow (p\vee q)\land (p\vee \lnot p)$, i kako je $(p\vee \lnot p)$ uvijek tačno, ekvivalentno sa,
+    \begin{align*}
+        &\Longleftrightarrow & x\in A&\vee x\in B & &\land & x\in A&\vee x\notin A\\
+        &\Longleftrightarrow & x\in A&\vee x\in B & &\land & &\top \\
+        &\Longleftrightarrow & x\in A&\vee x\in B
+    \end{align*}
+    \smallskip
+
+    \noindent
+    e) Konačno na osnovu aksioma unije zaključujemo $x\in (A\cup B)$, te vrijedi
+    \begin{equation}
+        (A\setminus B)\cup (A\cap B)\cup (B\setminus A)\subseteq A\cup B.\label{eq:2}
+    \end{equation}
+    \bigskip
+
+    \noindent
+    Dokažimo inkluziju "$\supseteq $"\\
+    a) Neka je $x\in (A\cup B)$ proizvoljan. Prema aksiomu unije $x$ pripada skupu $A$ ili pripada skupu $B$,
+    $$x\in A \vee x\in B$$
+    \smallskip
+
+    \noindent
+    b) Ako prema tautologiji $(p\vee \lnot p)\Longleftrightarrow\top$ na prethodni izraz dodamo tako da vrijedi,
+    $$(x\in A\vee x\in B)\land (x\in A\vee x\notin A)$$
+    Dalje prema zakonu distributivnosti $(p\vee q)\land (p\vee \lnot p)\Longleftrightarrow p\vee (q\land \lnot p)$ slijedi,
+    $$x\in A\vee (x\in B\land x\notin A).$$
+    
+    \noindent
+    Ako još jednom prema tautologiji $(p\vee \lnot p)=\top$ dodamo, ali sada sa lijeve strane,
+    $$(x\in B\vee x\notin B)\land x\in A\vee (x\in B\land x\notin A).$$
+    Dalje uz zakon distributivnosti $(q\vee \lnot q)\land p\Longleftrightarrow (p\land \lnot q)\vee (p\land q)$ slijedi,
+    $$(x\in A\land x\notin B)\vee (x\in A\land x\in B)\vee (x\in B\land x\notin A)$$
+    \smallskip
+
+    \noindent
+    c) Na osnovu definicije razlike zaključujemo da $x\in (A\setminus B)$ i $x\in (B\setminus A)$, te na osnovu definicije presjeka slijedi da $x\in (A\cap B)$,
+    $$x\in A\setminus B\vee x\in A\cap B\vee x\in B\setminus A.$$
+    \smallskip
+
+    \noindent
+    d) Konačno na osnovu aksioma unije vrijedi,
+    \begin{equation}
+        (A\setminus B)\cup (A\cap B)\cup (B\setminus A)\supseteq A\cup B.\label{eq:3}
+    \end{equation}
+    \medskip
+
+    \noindent
+    Iz \eqref{eq:2} i \eqref{eq:3} na osnovu aksioma ekstenzionalnosti zaključujemo jednakost skupova i vrijedi 
+    $$(A\setminus B)\cup (A\cap B)\cup (B\setminus A)=A\cup B.$$
+    \bigskip
+
+    \noindent
+    \textbf{(II način - algebarski dokaz)}
+    \smallskip
+
+    \noindent
+        Dokažimo skupovnu jednakost
+        $$(A\setminus B)\cup (A\cap B)\cup (B\setminus A)=A\cup B.$$
+
+        \begin{align*}
+            (A\setminus B)\cup (A\cap B)\cup (B\setminus A) &= (A\cap B^c)\cup (A\cap B)\cup (B\cap A^c)    \tag{\textrm{\footnotesize jer je $X\setminus Y=X\cap Y^c$}} \\
+                                                            &= A\cap (B^c\cup B)\cup (B\cap A^c)            \tag{\textrm{\footnotesize distributivnosti presjeka prema uniji}}\\
+                                                            &= A\cap U\cup (B\cap A^c)                      \tag{\textrm{\footnotesize jer je $X^c\cup X=U\ [univerzum]$}}\\
+                                                            &= A\cup (B\cap A^c)                            \tag{\textrm{\footnotesize jer je $X\cap U=X$}}\\
+                                                            &= (A\cup B)\cap (A\cup A^c)                    \tag{\textrm{\footnotesize distributivnosti unije prema presjeku}}\\
+                                                            &= (A\cup B)\cap U                              \tag{\textrm{\footnotesize $X^c\cup X=U$}}\\
+                                                            &= A\cup B\tag{$X\cap U=X$}
+        \end{align*}\\
+
+    \smallskip
+
+    \newpage
+    \noindent
+    \textbf{(III način - vennovim dijagramima)}
+    \smallskip
+
+    % PRIMJER ZA VENNOVE DIJAGRAME u TIKZ paketu
+    \begin{figure}[h]
+        \subfigure[]{
+        \begin{tikzpicture}[scale=0.6]
+            \draw (-2,2) rectangle (4.4cm,-2cm);
+            \draw (0,0) circle (1.5cm);
+            \draw (2.25,0) circle (1.5cm);
+            \node at (0,0)  (a)    {\scriptsize $2$};
+            \node at (1.1,0)  (b)    {\scriptsize $3$};
+            \node at (2.5,0)  (c)    {\scriptsize $1$};
+            \node at (-1.6,-1.7)  (d)    {\scriptsize $0$};
+            \node at (-1.6, 1.2) (e) {\scriptsize $A$};
+            \node at (3.7,1.2) (f) {\scriptsize $B$};
+            \node at (-1.7, 2.3) (g) {\scriptsize $U$};
+        \end{tikzpicture}} \hskip 2cm
+        % \subfigure[]{
+        % \begin{tikzpicture}[scale=0.6]
+        %     \draw (-2,2) rectangle (4.4cm,-3.7cm);
+        %     \draw (0,0) circle (1.5cm) node {};
+        %     \draw (2.25,0) circle (1.5cm) node {};
+        %     \draw (1.25,-1.75) circle (1.5cm) node {};
+        %     \node at (0,0)  (a) {\scriptsize $4$};
+        %     \node at (2.25,0)  (b) {\scriptsize $2$};
+        %     \node at (1.25,-1.75)  (c) {\scriptsize $1$};
+        %     \node at (1.8,-1)  (d) {\scriptsize $3$};
+        %     \node at (1.15,0)  (e) {\scriptsize $6$};
+        %     \node at (0.5,-1)  (f) {\scriptsize $5$};
+        %     \node at (1.1,-0.6)  (e) {\scriptsize $7$};
+        %     \node at (-1,-3)  (g) {\scriptsize $0$};
+        %     \node at (-1.6,1.2) (h) {\scriptsize $A$};
+        %     \node at (3.7,1.2) (i) {\scriptsize $B$};
+        %     \node at (2.7,-3.2) (j) {\scriptsize $C$};
+        %     \node at (-1.7,2.3) (k) {\scriptsize $U$};
+        % \end{tikzpicture}}
+        \end{figure}
+    
+    \noindent
+    Dakle skup $A=\{2, 3\}$ i skup $B=\{1, 3\}$. Dalje, skup $A\setminus B=\{2\}$, skup $A\cap B=\{3\}$ i skup $B\setminus A=\{1\}$. Koristeći se aksiomom unije za ta tri skupa imamo
+    $$(A\setminus B)\cup (A\cap B)\cup (B\setminus A)=\{2\}\cup \{3\}\cup \{1\}=\{1, 2, 3\},$$
+    i
+    $$A\cup B=\{2, 3\}\cup \{1, 3\}=\{1, 2, 3\}.$$
+    Kako se obje strane svode na isti skup regiona $\{1, 2, 3\}$, to je data skupovna jednaksot tačna.\\
+    \smallskip
+
+    \noindent
+    \textbf{(IV način - tabelarni metod)}\\
+    \smallskip
+
+    % PRIMJER RADA SA Tabelama
+    \begin{tabularx}{10cm}{|c|c|c|c|c|c|c|c}
+    $A$ & $B$ & $A\setminus B$ & $A\cap B$ & $B\setminus A$ & Lijevo & Desno & \\\hline
+    Ne & Ne & Ne & Ne & Ne & Ne & Ne & \\\hline
+    Ne & Da & Ne & Ne & Da & Da & Da & \\\hline
+    Da & Ne & Da & Ne & Ne & Da & Da & \\\hline
+    Da & Da & Da & Da & Da & Da & Da & \\\hline
+    \end{tabularx}\\
+    \smallskip
+    
+    \noindent
+    Kako su odgovori na svim pozicijama (Lijevo i Desno) indentični, to nam govori da je data skupovna jednakost tačna.
+
+    % % PRIMJER RADA SA Tabelama
+    % \begin{tabularx}{13cm}{|c|c|c|c|c|c|c|c|c|c}
+    % $A$ & $B$ & $C$ & $A\setminus B$ & $A\cap B$ & $B\setminus A$ & Lijevo & Desno & Venn & \\\hline
+    % Ne & Ne & Ne & Ne & Ne & Ne & Ne & Ne & 0 & \\\hline
+    % Da & Ne & Na & Da & Ne & Ne & Ne & Ne & 4 & \\\hline
+    % Ne & Da & Ne & Ne & Da & Ne & Ne & Ne & 2 & \\\hline
+    % Ne & Ne & Da & Ne & Ne & Ne & Ne & Ne & 1 & \\\hline
+    % Da & Da & Ne & Da & Da & Da & Da & Da & 6 & \checkmark \\\hline
+    % Da & Ne & Da & Ne & Ne & Ne & Ne & Ne & 5 & \\\hline
+    % Ne & Da & Da & Ne & Ne & Ne & Ne & Ne & 3 & \\\hline
+    % Da & Da & Da & Ne & Ne & Ne & Da & Ne & 7 & \\\hline
+    % \end{tabularx}
+
+\end{dokaz}
+
+\newpage
+% PRIMJER RADA Primjera
+\begin{primjer}
+    Dokažimo skupovnu jednakost $A\setminus (B\setminus C)=(A\setminus B)\cup (A\cap C)$.
+\end{primjer}
+
+\begin{dokaz}
+
+    \noindent\textbf{(I način - aksion ekstenzionalnosti)}
+    \smallskip
+
+    \noindent
+        Dokažimo inkluziju "$\subseteq $"\\
+        a) Neka je $x\in A\setminus (B\setminus C)$ proizvoljan. Tada na osnovu definicije razlike $x$ pripada skupu $A$, a ne pripada skupu $B\setminus C$, i pripada skupu $B$, a ne pripada skupu $C$,
+        $$x\in A\land x\notin (x\in B\land x\notin C),$$
+        što je ekvivalentno sa,
+        $$x\in A\land (x\notin B\vee x\in C).$$
+        \smallskip
+
+        \noindent
+        b) Prema zakonu distributivnosti slijedi,
+        $$(x\in A\land x\notin B)\vee (x\in A\land x\in C).$$
+        \smallskip
+
+        \noindent
+        c) Na osnovu definicija presjeka i razlike skupova imamo sljedeće,
+        $$x\in A\setminus B\vee x\in A\cap C$$
+        \smallskip
+
+        \noindent
+        d) Konačno na osnovu askioma unije vrijedi,
+        $$x\in (A\setminus B)\cup (A\cap C),$$
+        prema tome,
+        \begin{equation}
+            A\setminus (B\setminus C)\subseteq (A\setminus B)\cup (A\cap C).\label{eq:4}
+        \end{equation}
+        \bigskip
+
+        \noindent
+        Dokažimo inkluziju "$\supseteq $"\\
+        a) Neka je $x\in (A\setminus B)\cup (A\cap C)$ proizvoljno. Prema aksiomu unije $x$ pripada skupu $A\setminus B$ ili skupu $A\cap C$,
+        $$A\setminus B\vee A\cap C$$
+        \smallskip
+
+        \noindent
+        b) Na osnovu definicija presjeka i razlike skupova $x$ pripada skupu $A$, a ne pripada skupu $B$ ili pripada skupu $A$ i skupu $B$,
+        $$(x\in A\land x\notin B)\vee (x\in A\land x\in C)$$
+        \smallskip
+
+        \noindent
+        c) Na osnovu zakona distributivnosti slijedi,
+        $$x\in A\land (x\notin B\vee x\in C),$$
+        što još možemo zapisati kao,
+        $$x\in A\land x\notin (x\in B\land x\notin C)$$
+        \smallskip
+
+        \newpage\noindent\thispagestyle{empty}
+        d) Ako primjenimo definiciju razlike skupova vrijedi sljedeće,
+        \begin{align*}
+            x\in A &\land x\notin (x\in B\land x\notin C)\\
+            x\in A &\land x\notin(A\setminus C)\\
+            x\in A &\setminus (A\setminus C),
+        \end{align*}
+        prema tome vrijedi,
+        \begin{equation}
+            A\setminus (B\setminus C)\supseteq (A\setminus B)\cup (A\cap C).\label{eq:5}
+        \end{equation}
+        \medskip
+
+        \noindent
+        Iz \eqref{eq:4} i \eqref{eq:5} na osnovu aksioma ekstenzionalnosti zaključujemo jednakost skupova i vrijedi 
+        $$A\setminus (B\setminus C)=(A\setminus B)\cup (A\cap C).$$
+        \bigskip
+
+    \noindent
+    \textbf{(II način - algebarski dokaz)}
+    \smallskip
+
+    \noindent
+        Dokažimo skupovnu jednakost
+        $$A\setminus (B\setminus C)=(A\setminus B)\cup (A\cap C).$$
+
+        \begin{align*}
+            A\setminus (B\setminus C) &= A\cap (B\cap C^c)^c                \tag{\textrm{\footnotesize jer je $X\setminus Y=X\cap Y^c$}} \\
+                                          &= A\cap (B^c\cup (C^c)^c)        \tag{\textrm{\footnotesize DeMorganov zakon za skupove}}\\
+                                          &= A\cap (B^c\cup C)              \tag{\textrm{\footnotesize zakon idempotentnosti komplemenata}}\\
+                                          &= (A\cap B^c)\cup (A\cap C)      \tag{\textrm{\footnotesize zakon distributivnosti presjeka prema uniji}}\\
+                                          &= (A\setminus B)\cup (A\cap C)   \tag{\textrm{\footnotesize $X\setminus Y=X\cap Y^c$}}\\
+        \end{align*}\\
+
+    \smallskip
+
+    % \newpage
+    \noindent
+    \textbf{(III način - vennovim dijagramima)}
+    \smallskip
+
+    % PRIMJER ZA VENNOVE DIJAGRAME u TIKZ paketu
+    \begin{figure}[h]
+        % \subfigure[]{
+        % \begin{tikzpicture}[scale=0.6]
+        %     \draw (-2,2) rectangle (4.4cm,-2cm);
+        %     \draw (0,0) circle (1.5cm);
+        %     \draw (2.25,0) circle (1.5cm);
+        %     \node at (0,0)  (a)    {\scriptsize $2$};
+        %     \node at (1.1,0)  (b)    {\scriptsize $3$};
+        %     \node at (2.5,0)  (c)    {\scriptsize $1$};
+        %     \node at (-1.6,-1.7)  (d)    {\scriptsize $0$};
+        %     \node at (-1.6, 1.2) (e) {\scriptsize $A$};
+        %     \node at (3.7,1.2) (f) {\scriptsize $B$};
+        %     \node at (-1.7, 2.3) (g) {\scriptsize $U$};
+        % \end{tikzpicture}} \hskip 2cm
+        \subfigure[]{
+        \begin{tikzpicture}[scale=0.6]
+            \draw (-2,2) rectangle (4.4cm,-3.7cm);
+            \draw (0,0) circle (1.5cm) node {};
+            \draw (2.25,0) circle (1.5cm) node {};
+            \draw (1.25,-1.75) circle (1.5cm) node {};
+            \node at (0,0)  (a) {\scriptsize $4$};
+            \node at (2.25,0)  (b) {\scriptsize $2$};
+            \node at (1.25,-1.75)  (c) {\scriptsize $1$};
+            \node at (1.8,-1)  (d) {\scriptsize $3$};
+            \node at (1.15,0)  (e) {\scriptsize $6$};
+            \node at (0.5,-1)  (f) {\scriptsize $5$};
+            \node at (1.1,-0.6)  (e) {\scriptsize $7$};
+            \node at (-1,-3)  (g) {\scriptsize $0$};
+            \node at (-1.6,1.2) (h) {\scriptsize $A$};
+            \node at (3.7,1.2) (i) {\scriptsize $B$};
+            \node at (2.7,-3.2) (j) {\scriptsize $C$};
+            \node at (-1.7,2.3) (k) {\scriptsize $U$};
+        \end{tikzpicture}}
+        \end{figure}
+    
+    \noindent
+    Dakle skup $A=\{4, 5, 6, 7\}$, skup $B=\{2, 3, 6, 7\}$ i skup $C=\{1, 3, 5, 7\}$. Dalje, skup $B\setminus C=\{2, 6\}$, skup $A\setminus B=\{4, 5\}$ i skup $A\cap C=\{5, 7\}$. Na osnovu aksioma unije i definicije razlike skupova imamo
+    $$A\setminus (B\setminus C)=\{4, 5, 6, 7\}\setminus \{2, 6\}=\{4, 5, 7\}$$
+    i
+    $$(A\setminus B)\cup (A\cap C)=\{4, 5\}\cup \{5, 7\}=\{4, 5, 7\}$$
+    Kako se obje strane svode na isti skup regiona $\{4, 5, 7\}$, to je data skupovna jednaksot tačna.\\
+    \smallskip
+
+    \noindent
+    \textbf{(IV način - tabelarni metod)}\\
+    \smallskip
+
+    % PRIMJER RADA SA Tabelama
+    % \begin{tabularx}{10cm}{|c|c|c|c|c|c|c|c}
+    % $A$ & $B$ & $A\setminus B$ & $A\cap B$ & $B\setminus A$ & Lijevo & Desno & \\\hline
+    % Ne & Ne & Ne & Ne & Ne & Ne & Ne & \\\hline
+    % Ne & Da & Ne & Ne & Da & Da & Da & \\\hline
+    % Da & Ne & Da & Ne & Ne & Da & Da & \\\hline
+    % Da & Da & Da & Da & Da & Da & Da & \\\hline
+    % \end{tabularx}\\
+    % \smallskip
+
+    % PRIMJER RADA SA Tabelama
+    \begin{tabularx}{11cm}{|c|c|c|c|c|c|c|c|c}
+    $A$ & $B$ & $C$ & $B\setminus C$ & $A\setminus B$ & $A\cap C$ & Lijevo & Desno & \\\hline
+    Ne & Ne & Ne & Ne & Ne & Ne & Ne & Ne & \\\hline
+    Da & Ne & Na & Ne & Da & Ne & Da & Da & \\\hline
+    Ne & Da & Ne & Da & Ne & Ne & Ne & Ne & \\\hline
+    Ne & Ne & Da & Ne & Ne & Ne & Ne & Ne & \\\hline
+    Da & Da & Ne & Da & Da & Ne & Da & Da & \\\hline
+    Da & Ne & Da & Ne & Da & Da & Da & Da & \\\hline
+    Ne & Da & Da & Da & Ne & Ne & Ne & Ne & \\\hline
+    Da & Da & Da & Da & Da & Da & Da & Da & \\\hline
+    \end{tabularx}\\
+    \smallskip
+    
+    \noindent
+    Kako su odgovori na svim pozicijama (Lijevo i Desno) indentični, to nam govori da je data skupovna jednakost tačna.
+
+
+\end{dokaz}
+
+% PRIMJER RADA Zadatka
+\begin{zadatak}
+    Neka su $A, B$ i $C$ proizvoljni skupovi i $U$ univerzum. Tada vrijedi,
+    \begin{enumerate}
+        \item $(A^c)^c=A$. (zakon idempotentnosti komplemenata)
+        \item $U^c=\varnothing\ ;\ \varnothing ^c=U$.
+        \item $A\cup A^c=U\ ;\ A\cap A^c=\varnothing$. (zakoni komplemenata)
+        \item $A\setminus (B\cap C)=(A\setminus B)\cup (A\setminus C)\ ;\ A\setminus (B\cup C)=(A\setminus B)\cap (A\setminus C)$.
+        \item $A\setminus B=A\cap B^c$. (zakon skupovne razlike)
+    \end{enumerate}
+\end{zadatak}
+
+\vskip 1cm
+
+% PRIMJER RADA Primjera
+\begin{primjer}
+    Dokažimo skupovnu jednakost $(A^c)^c=A$.
+\end{primjer}
+
+\begin{dokaz}
+    \begin{align*}
+        (A^c)^c &= (U\setminus A)^c                 \tag{\textrm{\footnotesize jer jer $X^c=U\setminus X$}}\\
+                &= U\setminus (U\setminus A)        \tag{\textrm{\footnotesize $X^c=U\setminus X$}}\\
+                &= U\cap (U\cap A^c)^c              \tag{\textrm{\footnotesize $X\setminus Y=X\cap Y^c$}}\\
+                &= U\cap (U^c\cup (A^c)^c)          \tag{\textrm{\footnotesize DeMorganov zakon za skupove}}\\
+                &= U\cap (U^c\cup A)                \tag{\textrm{\footnotesize zakon idempotentnosti komplemenata}}\\
+                &= (U\cap U^c)\cup (U\cap A)        \tag{\textrm{\footnotesize distributivnost presjeka prema uniji}}\\
+                &= \varnothing\cup A                \tag{\textrm{\footnotesize jer je $U\cap U^c = \varnothing\ i\ U\cap A=A$}}\\
+                &= A
+    \end{align*}
+\end{dokaz}
+
+\newpage
+% PRIMJER RADA Primjera
+\begin{primjer}
+    Dokažimo skupovnu jednakost $U^c=\varnothing,\ \varnothing ^c=U$.
+\end{primjer}
+
+\begin{dokaz}
+    Neka je $x\in U^c$,
+    \begin{align*}
+        x\in U^c    &\Longleftrightarrow x\in U\land x\notin U          \tag{\textrm{\footnotesize definicija komplementa}}\\
+                    &\Longleftrightarrow \bot                           \tag{\textrm{\footnotesize $p\land \lnot p=\bot$}}\\
+    \end{align*}
+    Kako je $x\in U^c\Longleftrightarrow\bot$ i $x$ bilo proizvoljno, slijedi da je $(\forall x)x\in U^c\Longleftrightarrow\bot.$\\
+    Kako je $\bot\Longleftrightarrow x\in \varnothing$, jer $(\forall x)x\notin \varnothing$ slijedi da je
+    $$U^c\Longleftrightarrow\varnothing$$
+    Neka je $y\in\varnothing ^c$,
+    \begin{align*}
+        y\in\varnothing ^c  &\Longleftrightarrow y\in U \land y\notin\varnothing    \tag{\textrm{\footnotesize definicija komplementa}}\\
+                            &\Longleftrightarrow y\in U\land\top                    \tag{\textrm{\footnotesize $y\notin\varnothing\Longleftrightarrow \top,$ jer $(\forall x)x\notin\varnothing$}}\\
+                            &\Longleftrightarrow y\in U                             \tag{\textrm{\footnotesize $p\land \top\Longleftrightarrow p$}}\\
+    \end{align*}
+    Kako je $y$ bilo proizvoljno vrijedi,
+    $$\varnothing ^c=U$$
+\end{dokaz}
+
+\begin{primjer}
+    Dokažimo skupovnu jednakost $A\setminus (B\cap C)=(A\setminus B)\cup (A\setminus C)$ i $A\setminus (B\cup C)=(A\setminus B)\cap (A\setminus C)$.
+\end{primjer}
+
+\begin{dokaz}
+    \begin{align*}
+        A\setminus (B\cap C)    &= A\cap (B\cap C)^c                    \tag{\textrm{\footnotesize $X\setminus Y=X\cap Y^c$}}\\
+                                &= A\cap (B^c\cup C^c)                  \tag{\textrm{\footnotesize DeMorganov zakon za skupove}}\\
+                                &= (A\cap B^c)\cup (A\cap C^c)          \tag{\textrm{\footnotesize distributivnost presjeka prema uniji}}\\
+                                &= (A\setminus B)\cup (A\setminus C)    \tag{\textrm{\footnotesize $X\setminus Y=X\cap Y^c$}}\\
+    \end{align*}
+    \begin{align*}
+        A\setminus (B\cup C)    &= A\cap (B\cup C)^c                    \tag{\textrm{\footnotesize $X\setminus Y=X\cap Y^c$}}\\
+                                &= A\cap (B^c\cap C^c)                  \tag{\textrm{\footnotesize DeMorganov zakon za skupove}}\\
+                                &= (A\cap B^c)\cap (A\cap C^c)          \tag{\textrm{\footnotesize distributivnost presjeka}}\\
+                                &= (A\setminus B)\cap (A\setminus C)    \tag{\textrm{\footnotesize $X\setminus Y=X\cap Y^c$}}\\
+    \end{align*}
+\end{dokaz}
+
+\newpage
+\begin{primjer}
+    Dokažimo skupovnu jednakost $A\setminus B=A\cap B^c$.
+\end{primjer}
+
+\begin{dokaz}
+    Neka je $x\in A\setminus B$,
+    \begin{align*}
+        x\in A\setminus B   &\Longleftrightarrow x\in A \land x\notin B                     \tag{\textrm{\footnotesize definicija razlike}}\\
+                            &\Longleftrightarrow (x\in A \land x\notin B) \land \top        \tag{\textrm{\footnotesize $p\land \top \Longleftrightarrow p$}}\\
+                            &\Longleftrightarrow (x\in A \land x\notin B) \land x\in U      \tag{\textrm{\footnotesize $(\forall x)x\in U pa je x\in U \Longleftrightarrow \top$}}\\
+                            &\Longleftrightarrow x\in A \land (x\notin B\land x\in U)       \tag{\textrm{\footnotesize asocijativnost konjukcije}}\\
+                            &\Longleftrightarrow x\in A \land x\in B^c                      \tag{\textrm{\footnotesize definicija komplementa}}\\
+                            &\Longleftrightarrow x\in A\cap B^c                             \tag{\textrm{\footnotesize definicija razlike}}\\
+    \end{align*}
+    Kako je $x$ bilo proizvoljno, $(\forall x)(x\in A\setminus B)$ i $(\forall x)(x\in A\cap B^c)$ i kako su ova dva skupa ekvivalentna vrijedi $A\setminus B=A\cap B^c$
+\end{dokaz}
+
+\end{document} 

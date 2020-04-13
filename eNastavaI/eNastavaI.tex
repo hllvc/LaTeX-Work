@@ -1,0 +1,256 @@
+\documentclass{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+
+    \thispagestyle{empty}
+
+    \begin{flushleft}
+
+        \textbf{ZADATAK 1}\\
+        \bigskip
+
+        Dokazati da
+        $(A\setminus B)\cup (A\cap B)\cup (B\setminus A)=A\cup B$\\
+        \bigskip
+
+        \textbf{DOKAZ: (I način - aksion ekstenzionalnosti)}
+    \end{flushleft}
+
+    \noindent
+    Dokažimo inkluziju "$\subseteq $"\\
+    a) Neka je $x\in (A\setminus B)\cup (A\cap B)\cup (B\setminus A)$ proizvoljan. Tada na osnovu aksioma unije slijedi da $x$ pripada skupu $A\setminus B$ ili skupu $A\cap B$ ili skupu $B\setminus A$,
+    $$x\in A\setminus B\vee x\in A\cap B\vee x\in B\setminus A.$$
+    \smallskip
+
+    \noindent
+    b) Sada na osnovu definicije razlike skupova imamo da $x$ pripada skupu $A$, a ne pripada skupu $B$ i $x$ pripada skupu $B$, a ne pripada skupu $A$,
+    $$(x\in A\land x\notin B)\vee (A\cap B)\vee (x\in B\land x\notin A).$$
+    \smallskip
+
+    \noindent
+    c) Na osnovu definicije presjeka, $x$ pripada skupu $A$ i $x$ pripada skupu $B$,
+    $$(x\in A\land x\notin B)\vee (x\in A\land x\in B)\vee (x\in B\land x\notin A).\ (\ast ) $$
+    \smallskip
+
+    \noindent
+    d) Prema tautologiji $(p\land \lnot q)\vee (p\land q)\Leftrightarrow  p\land (\lnot q\vee q)$, i kako je $(\lnot q\vee q)$ uvijek tačno, $(\ast )$ je ekvivalentan sa,
+    \begin{align*}
+       (\ast )\hspace{8px} &\Leftrightarrow & &x\in A & &\land & (x\notin B&\vee x\in B) & &\vee & &(x\in B\land x\notin A)\\
+                           &\Leftrightarrow & &x\in A & &\land & &\top & &\vee & &(x\in B\land x\notin A)
+    \end{align*}
+    Ovo je dalje prema tautologiji $p\vee (q\land \lnot p)\Leftrightarrow (p\vee q)\land (p\vee \lnot p)$, i kako je $(p\vee \lnot p)$ uvijek tačno, ekvivalentno sa,
+    \begin{align*}
+        &\Leftrightarrow & x\in A&\vee x\in B & &\land & x\in A&\vee x\notin A\\
+        &\Leftrightarrow & x\in A&\vee x\in B & &\land & &\top \\
+        &\Leftrightarrow & x\in A&\vee x\in B
+    \end{align*}
+    \smallskip
+
+    \noindent
+    e) Konačno na osnovu aksioma unije zaključujemo $x\in (A\cup B)$, te vrijedi
+    $$(A\setminus B)\cup (A\cap B)\cup (B\setminus A)\subseteq A\cup B.\ (\blacktriangle)$$
+    \bigskip
+
+    \noindent
+    Dokažimo inkluziju "$\supseteq $"\\
+    a) Neka je $x\in (A\cup B)$ proizvoljan. Prema aksiomu unije $x$ pripada skupu $A$ ili pripada skupu $B$,
+    $$x\in A \vee x\in B$$
+    \smallskip
+
+    % \newpage
+    % \thispagestyle{empty}
+    \noindent
+    b) Ako prema tautologiji $(p\vee \lnot p)=\top$ na prethodni izraz dodamo tako da vrijedi,
+    $$(x\in A\vee x\in B)\land (x\in A\vee x\notin A)$$
+    Dalje prema tautologiji $(p\vee q)\land (p\vee \lnot p)\Leftrightarrow p\vee (q\land \lnot p)$ slijedi,
+    $$x\in A\vee (x\in B\land x\notin A).$$
+    \newpage\noindent\thispagestyle{empty}
+    Ako još jednom prema tautologiji $(p\vee \lnot p)=\top$ dodamo, ali sada sa lijeve strane,
+    $$(x\in B\vee x\notin B)\land x\in A\vee (x\in B\land x\notin A).$$
+    Dalje korištenjem se tautologije $(q\vee \lnot q)\land p\Leftrightarrow (p\land \lnot q)\vee (p\land q)$ slijedi,
+    $$(x\in A\land x\notin B)\vee (x\in A\land x\in B)\vee (x\in B\land x\notin A)$$
+    \smallskip
+
+    \noindent
+    c) Na osnovu definicije razlike zaključujemo da $x\in (A\setminus B)$ i $x\in (B\setminus A)$, te na osnovu definicije presjeka slijedi da $x\in (A\cap B)$,
+    $$x\in A\setminus B\vee x\in A\cap B\vee x\in B\setminus A.$$
+    \smallskip
+
+    \noindent
+    d) Konačno na osnovu aksioma unije vrijedi,
+    $$(A\setminus B)\cup (A\cap B)\cup (B\setminus A)\supseteq A\cup B.\ (\blacktriangle\blacktriangle)$$
+    \medskip
+
+    \noindent
+    Iz $(\blacktriangle)$ i $(\blacktriangle\blacktriangle)$ na osnovu aksioma ekstenzionalnosti zaključujemo jednakost skupova i vrijedi $(A\setminus B)\cup (A\cap B)\cup (B\setminus A)=A\cup B.$
+    \bigskip
+
+    \begin{flushleft}
+        \textbf{DOKAZ: (II način - algebarski dokaz)}
+    \end{flushleft}
+
+    \noindent
+        Dokažimo skupovnu jednakost
+        $$(A\setminus B)\cup (A\cap B)\cup (B\setminus A)=A\cup B.$$
+
+        \begin{align*}
+            (A\setminus B)\cup (A\cap B)\cup (B\setminus A) &= (A\cap B^c)\cup (A\cap B)\cup (B\cap A^c)\tag{jer je $X\setminus Y=X\cap Y^c$} \\
+                                                            &= A\cap (B^c\cup B)\cup (B\cap A^c)\tag{$(p\land \lnot q)\vee (p\land q)\Leftrightarrow  p\land (\lnot q\vee q)$}\\
+                                                            &= A\cap U\cup (B\cap A^c)\tag{jer je $X^c\cup X=U\ [univerzum]$}\\
+                                                            &= A\cup (B\cap A^c)\tag{jer je $X\cap U=X$}\\
+                                                            &= (A\cup B)\cap (A\cup A^c)\tag{$p\vee (q\land \lnot p)\Leftrightarrow (p\vee q)\land (p\vee \lnot p)$}\\
+                                                            &= (A\cup B)\cap U\tag{$X^c\cup X=U$}\\
+                                                            &= A\cup B\tag{$X\cap U=X$}
+        \end{align*}
+
+        \newpage\noindent\thispagestyle{empty}
+        \begin{flushleft}
+
+            \textbf{ZADATAK 2}\\
+            \bigskip
+    
+            Dokazati da
+            $A\setminus (B\setminus C)=(A\setminus B)\cup (A\cap C)$\\
+            \bigskip
+    
+            \textbf{DOKAZ: (I način - aksion ekstenzionalnosti)}
+        \end{flushleft}
+
+        \noindent
+        Dokažimo inkluziju "$\subseteq $"\\
+        a) Neka je $x\in A\setminus (B\setminus C)$ proizvoljan. Tada na osnovu definicije razlike $x$ pripada skupu $A$, a ne pripada skupu $B\setminus C$, i pripada skupu $B$, a ne pripada skupu $C$,
+        $$x\in A\land x\notin (x\in B\land x\notin C),$$
+        što je ekvivalentno sa,
+        $$x\in A\land (x\notin B\vee x\in C).$$
+        \smallskip
+
+        \noindent
+        b) Prema DeMorganovih zakonima slijedi,
+        $$(x\in A\land x\notin B)\vee (x\in A\land x\in C).$$
+        \smallskip
+
+        \noindent
+        c) Na osnovu definicija presjeka i razlike skupova imamo sljedeće,
+        $$x\in A\setminus B\vee x\in A\cap C$$
+        \smallskip
+
+        \noindent
+        d) Konačno na osnovu askioma unije vrijedi,
+        $$x\in (A\setminus B)\cup (A\cap C),$$
+        prema tome,
+        $$A\setminus (B\setminus C)\subseteq (A\setminus B)\cup (A\cap C).\ (\spadesuit)$$
+        \bigskip
+
+        \noindent
+        Dokažimo inkluziju "$\supseteq $"\\
+        a) Neka je $x\in (A\setminus B)\cup (A\cap C)$ proizvoljno. Prema aksiomu unije $x$ pripada skupu $A\setminus B$ ili skupu $A\cap C$,
+        $$A\setminus B\vee A\cap C$$
+        \smallskip
+
+        \noindent
+        b) Na osnovu definicija presjeka i razlike skupova $x$ pripada skupu $A$, a ne pripada skupu $B$ ili pripada skupu $A$ i skupu $B$,
+        $$(x\in A\land x\notin B)\vee (x\in A\land x\in C)$$
+        \smallskip
+
+        \noindent
+        c) Na osnovu DeMorganovih zakona slijedi,
+        $$x\in A\land (x\notin B\vee x\in C),$$
+        što još možemo zapisati kao,
+        $$x\in A\land x\notin (x\in B\land x\notin C)$$
+        \smallskip
+
+        \newpage\noindent\thispagestyle{empty}
+        d) Ako primjenimo definiciju razlike skupova vrijedi sljedeće,
+        \begin{align*}
+            x\in A &\land x\notin (x\in B\land x\notin C)\\
+            x\in A &\land x\notin(A\setminus C)\\
+            x\in A &\setminus (A\setminus C),
+        \end{align*}
+        prema tome vrijedi,
+        $$A\setminus (B\setminus C)\supseteq (A\setminus B)\cup (A\cap C).\ (\spadesuit\spadesuit)$$
+        \medskip
+
+        \noindent
+        Iz $(\spadesuit)$ i $(\spadesuit\spadesuit)$ na osnovu aksioma ekstenzionalnosti zaključujemo jednakost skupova i vrijedi $A\setminus (B\setminus C)=(A\setminus B)\cup (A\cap C).$
+        \bigskip
+    
+        \begin{flushleft}
+            \textbf{DOKAZ: (II način - algebarski dokaz)}
+        \end{flushleft}
+    
+        \noindent
+            Dokažimo skupovnu jednakost
+            $$A\setminus (B\setminus C)=(A\setminus B)\cup (A\cap C)B.$$
+    
+            \begin{align*}
+                A\setminus (B\setminus C) &= A\cap (B\cap C^c)^c\tag{jer je $X\setminus Y=X\cap Y^c$} \\
+                                          &= A\cap (B^c\cup C)\tag{osobine komplementa}\\
+                                          &= (A\cap B^c)\cup (A\cap C)\tag{DeMorganovi zakoni}\\
+                                          &= (A\setminus B)\cup (A\cap C)\tag{$X\setminus Y=X\cap Y^c$}\\
+            \end{align*}
+    \newpage\noindent\thispagestyle{empty}
+    \begin{flushleft}
+    
+        \textbf{ZADATAK 3}\\
+        \bigskip
+        
+        Dokazati da\\
+        $1.\ (A^c)^c=A.$\\
+        $2.\ U^c=\varnothing \ ;\ \varnothing ^c=U.$\\
+        $3.\ A\cup A^c=U\ ;\ A\cap A^c=\varnothing.$
+        \bigskip
+        
+        \textbf{DOKAZ:}
+    \end{flushleft}
+
+    \noindent
+    Dokažimo skupovnu jednakost
+    $$(A^c)^c=A$$
+
+    \begin{align*}
+        (A^c)^c &= (U\setminus A)^c\tag{jer jer $X^c=U\setminus X$}\\
+                &= U\setminus (U\setminus A)\tag{$X^c=U\setminus X$}\\
+                &= U\cap x\notin (U\cap x\notin A)\tag{$X\setminus Y=X\cap x\notin Y$}\\
+                &= U\cap (x\notin U\cup A)\tag{djelovanje negacije}\\
+                &= (U\cap x\notin U)\cup (U\cap A)\tag{$U\cap x\notin U = \varnothing,\ U\cap A = A$}\\
+                &= A
+    \end{align*}
+    \medskip
+
+    \noindent
+    Dokažimo skupovne jednakosti
+    $$U^c=\varnothing\ ;\ \varnothing ^c=U$$
+
+    \begin{align*}
+        U^c &= U\setminus U\tag{$X^c=U\setminus X$}\\
+            &= \varnothing
+    \end{align*}
+    \begin{align*}
+        \varnothing ^c &= U\setminus \varnothing\tag{$X^c=U\setminus X$}\\
+                       &= U
+    \end{align*}
+    \medskip
+
+    \noindent
+    Dokažimo skupovne jednakosti
+    $$A\cup A^c=U\ ;\ A\cap A^c=\varnothing$$
+
+    \begin{align*}
+        A\cup A^c &= A\cup (U\setminus A)\tag{$X^c=U\setminus X$}\\
+                  &= A\cup (U\cap x\notin A)\tag{$X\setminus Y=X\cap x\notin Y$}\\
+                  &= (A\cup U)\cap (A\cup x\notin A)\tag{DeMorganovi zakoni}\\
+                  &= (A\cup U)\cap \top\tag{$A\cup x\notin A=\top \ [neprazan\ skup]$}\\
+                  &= A\cup U\tag{$X\cap \top=X$}\\
+                  &= U\tag{$X\cup U=U$}
+    \end{align*}
+    \begin{align*}
+        A\cap A^c &= A\cap (U\setminus A)\tag{$X^c=U\setminus X$}\\
+                  &= A\cap (U\cap x\notin A)\tag{$X\setminus Y=X\cap x\notin Y$}\\
+                  &= (A\cap U)\cap (A\cap x\notin A)\tag{DeMorganovi zakoni}\\
+                  &= (A\cap U)\cap \varnothing\tag{$A\cap x\notin A=\varnothing $}\\
+                  &= \varnothing \tag{$X\cap \varnothing=\varnothing$}\\
+    \end{align*}
+
+\end{document}
